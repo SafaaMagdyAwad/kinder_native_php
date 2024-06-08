@@ -37,17 +37,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
        
   
   //userName &email are unique
-      $sql1 = "SELECT * FROM `users` WHERE `userName`=? or email=? ";
+      $sql1 = "SELECT * FROM `users` WHERE (`userName`=? OR `email`=?) AND `id`!=?; ";
       $stmt1 = $conn->prepare($sql1);
-      $stmt1->execute([$userName,$email]);
-      $existsUser= $stmt1->fetch();
-      if($existsUser['id'] !=$id){
-          echo "you cant use this userName or email there is already account,  <a href='edit_user.php?id=".$id ."' >back to edit user</a>";
-          die();
+      $stmt1->execute([$userName,$email,$id]);
+      $existsUser= $stmt1->fetch();//boolean value
+      
+      // var_dump($existsUser);die();
+      if($existsUser){
+        echo "<h1>you cant use this userName or email there is already account,  <a href='edit_user.php?id=".$id ."' >back to edit user</a></h1>";
+        die();
       }else{
         if(isset($_POST['password']) && !empty($_POST['password'])) {
-          // var_dump("sa");
-          // die();
           $password=password_hash($_POST['password'],PASSWORD_BCRYPT);
           $sql = "UPDATE `users` SET `fullName`=?,`userName`=?,`email`=?,`password`=?,`phone`=?,`active`=? WHERE id=?";
           $stmt = $conn->prepare($sql);
@@ -68,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
       $error= $e->getMessage();
     }
   }else{
-    echo "full name , user name , email are required,  <a href='edit_user.php?id=".$id ."' >back to edit user</a>";
+    echo "<h1>full name , user name , email are required,  <a href='edit_user.php?id=".$id ."' >back to edit user</a></h1>";
     die();
   }
   
