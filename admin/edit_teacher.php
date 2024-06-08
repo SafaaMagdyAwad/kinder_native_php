@@ -22,6 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     $fullName=$_POST["fullName"];
     $jopTitle=$_POST["jopTitle"];
     $id=$_POST["id"];
+    $old_published=$_POST["old_published"];
 
     if(isset($_POST["published"]) && !empty($_POST["published"])){   
       $published=$_POST["published"];//if
@@ -38,8 +39,12 @@ $sql = "SELECT * FROM `classes` WHERE teacher_id=?";
       $stmt = $conn->prepare($sql);
       $stmt->execute([$id]);
       $classes= $stmt->fetchAll();
-      if($classes){//
-        $updatepublished="";
+      if($classes && $published != $old_published){//
+        $sql = "UPDATE `teachers` SET `fullName`=?,`jopTitle`=?,`image`=? WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$fullName,$jopTitle,$image_name,$id]);
+        echo "<h1> you cant change the state of this teacher as this teacher relerate to courses <a href='edit_teacher.php?id=". $id."'>Update Teacher</a> but other data was updated</h1>";
+        die();
       }else{
            $sql = "UPDATE `teachers` SET `fullName`=?,`jopTitle`=?,`published`=?,`image`=? WHERE id=?";
           $stmt = $conn->prepare($sql);
@@ -89,32 +94,11 @@ $sql = "SELECT * FROM `classes` WHERE teacher_id=?";
       }
       ?>
       </h3>
-          <h3>
-              <?php
-      if(isset($updatepublished)) {
-      ?>
-      <div style="color: #ee0002; padding: 5px;">
-      you can't update published for this teacher ,becouse this teacher is working in courses delete courser first 
-      <br>
-      classes
-      <?php foreach($classes as $class) { ?>
-        <h1><a href="class_details.php?id=<?php echo $class['id'] ?>">
-                <?php echo $class['className']; ?>
-                </a></h1><br>
-                <h1><a href="deleteClass.php?id=<?php echo $class['id'] ?>"> Or direct delete class 
-                <?php echo $class['className']; ?> from here
-                </a></h1><br>
-      <?php } ?>
-
-      </div>
-      <?php
-      die();
-      }
-      ?>
-      </h3>
+        
           <form action="" method="post" class="px-md-5" enctype="multipart/form-data">
             <input name="id" value="<?php echo $teacher['id'] ?>" hidden/>
             <input name="image_name" value="<?php echo $teacher['image'] ?>" hidden/>
+            <input name="old_published" value="<?php echo $teacher['published'] ?>" hidden/>
             <div class="form-group mb-3 row">
               <label for="" class="form-label col-md-2 fw-bold text-md-end"
                 >Fullname:</label
