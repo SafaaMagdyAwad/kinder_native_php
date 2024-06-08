@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
     $stmt->execute([$id]);
     $teacher= $stmt->fetch();
     if(! $teacher){
-      echo "<h1>this teacher dosen't exsist<a href='edit_teacher.php?id=". $id,"' >return to update teacher</a></h1>";
+      echo "<h1>this teacher dosen't exsist<a href='teachers.php' >return to all teachers</a></h1>";
       die();
     }
   }catch(Exception $e){
