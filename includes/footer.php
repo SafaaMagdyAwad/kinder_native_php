@@ -48,7 +48,7 @@ try{
                         <h3 class="text-white mb-4">Quick Links</h3>
                         <a class="btn btn-link text-white-50" href="about.php">About Us</a>
                         <a class="btn btn-link text-white-50" href="contact.php">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="service.php">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="facility.php">Our Services</a>
                         <a class="btn btn-link text-white-50" href="#">Privacy Policy</a>
                         <a class="btn btn-link text-white-50" href="#">Terms & Condition</a>
                     </div>
