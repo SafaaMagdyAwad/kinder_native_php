@@ -18,10 +18,14 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
   }
 }
 if($_SERVER['REQUEST_METHOD'] == "POST") {
-  try{
+$id=$_POST["id"];
+  if(
+    !empty($_POST["fullName"])
+    && !empty($_POST["jopTitle"])
+  ){
+    try{
     $fullName=$_POST["fullName"];
     $jopTitle=$_POST["jopTitle"];
-    $id=$_POST["id"];
     $old_published=$_POST["old_published"];
 
     if(isset($_POST["published"]) && !empty($_POST["published"])){   
@@ -43,7 +47,7 @@ $sql = "SELECT * FROM `classes` WHERE teacher_id=?";
         $sql = "UPDATE `teachers` SET `fullName`=?,`jopTitle`=?,`image`=? WHERE id=?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$fullName,$jopTitle,$image_name,$id]);
-        echo "<h1> you cant change the state of this teacher as this teacher relerate to courses <a href='edit_teacher.php?id=". $id."'>Update Teacher</a> but other data was updated</h1>";
+        echo "<h1> you cant change the state of this teacher as this teacher relerated to courses ,but other data was updated   <a href='edit_teacher.php?id=". $id."'>Return To Update Teacher</a> </h1>";
         die();
       }else{
            $sql = "UPDATE `teachers` SET `fullName`=?,`jopTitle`=?,`published`=?,`image`=? WHERE id=?";
@@ -57,8 +61,12 @@ $sql = "SELECT * FROM `classes` WHERE teacher_id=?";
 
     
    
-  }catch(Exception $e){
-    $error= $e->getMessage();
+    }catch(Exception $e){
+      $error= $e->getMessage();
+    }
+  }else{
+    echo "<h1>You can't empty full name or jop title <a href='edit_teacher.php?id=".$id."'>Return To UpdateTeacher</a></h1>";
+    die();
   }
 }
 
