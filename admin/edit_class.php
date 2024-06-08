@@ -27,7 +27,16 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
   }
 }
 if($_SERVER['REQUEST_METHOD'] == "POST") {
-  if(isset($_POST["teacher_id"]) && !empty($_POST["teacher_id"])) {
+  $id=$_POST["id"];
+  if(isset($_POST["teacher_id"]) 
+  && !empty($_POST["className"])
+  && !empty($_POST["price"])
+  && !empty($_POST["capacity"])
+  && !empty($_POST["ageFrom"])
+  && !empty($_POST["ageTo"])
+  && !empty($_POST["timeFrom"])
+  && !empty($_POST["timeTo"])
+  ) {
     try{
         $className=$_POST["className"];
         $teacher_id=$_POST["teacher_id"];
@@ -37,7 +46,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         $ageTo=$_POST["ageTo"];
         $timeFrom=$_POST["timeFrom"];
         $timeTo=$_POST["timeTo"];
-        $id=$_POST["id"];
         if(isset($_POST["published"]) && !empty($_POST["published"])){
 
           $published=$_POST["published"];
@@ -64,7 +72,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         $error= $e->getMessage();
       }
   }else{
-    header("location:404.php");
+    echo "<h1>you must fill filds with data <a href='edit_class.php?id=".$id."'>Return To Update Class</a></h1>";
+    die();
   }
     
   
