@@ -14,38 +14,44 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
       $error= $e->getMessage();
       }
       }
-      if($_SERVER['REQUEST_METHOD'] == "POST") {
-        try{
-          $fullName=$_POST["fullName"];
-          $jopTitle=$_POST["jopTitle"];
-          $comment=$_POST["comment"];
-          $id=$_POST["id"];
-          
-          if(isset($_POST["published"]) && !empty($_POST["published"])){
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+      $id=$_POST["id"];
+        if(
+          !empty($_POST["fullName"]) 
+          && !empty($_POST["jopTitle"]) 
+          && !empty($_POST["comment"]) 
+
+        ){
+          try{
+            $fullName=$_POST["fullName"];
+            $jopTitle=$_POST["jopTitle"];
+            $comment=$_POST["comment"];
             
-            $published=$_POST["published"];//if
-          }else{
-            $published= 0;
+            if(isset($_POST["published"]) && !empty($_POST["published"])){
+              
+              $published=$_POST["published"];//if
+            }else{
+              $published= 0;
+            }
+  
+            $oldImage=$_POST["image_name"];
+  
+            require_once "includes/updateImage.php";
+
+            $sql = "UPDATE `testimonials` SET `fullName`=?,`jopTitle`=?,`comment`=?,`published`=?,`image`=? WHERE id=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$fullName,$jopTitle,$comment,$published,$image_name,$id]);
+              
+            header("location:testimonials.php");
+            die();
+          
+          }catch(Exception $e){
+            $error= $e->getMessage();
           }
-
-          $oldImage=$_POST["image_name"];
-
-          require_once "includes/updateImage.php";
-      // var_dump("sa");
-// die();
-   
-
-$sql = "UPDATE `testimonials` SET `fullName`=?,`jopTitle`=?,`comment`=?,`published`=?,`image`=? WHERE id=?";
-$stmt = $conn->prepare($sql);
-$stmt->execute([$fullName,$jopTitle,$comment,$published,$image_name,$id]);
-// var_dump($stmt->fetch());die();
-   
-    header("location:testimonials.php");
-    die();
-   
-  }catch(Exception $e){
-    $error= $e->getMessage();
-  }
+        }else{
+          echo "<h1>You can't empty full name or jop title or comment <a href='edit_testimonial.php?id=".$id."'>Return To Update Testimonial</a></h1>";
+          die();
+        }
 }
 
 
