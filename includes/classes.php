@@ -43,7 +43,7 @@ try{
                                 <img class="img-fluid rounded-circle" src="images/<?php echo $class['image'];  ?>" alt="">
                             </div>
                             <div class="bg-light rounded p-4 pt-5 mt-n5">
-                                <a class="d-block text-center h3 mt-3 mb-4" href="index.php"><?php echo $class['className'];  ?></a>
+                                <a class="d-block text-center h3 mt-3 mb-4" href="classDetails.php?id=<?php echo $class['id'];  ?>"><?php echo $class['className'];  ?></a>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle flex-shrink-0" src="images/<?php echo $class['tImage'];  ?>" alt="" style="width: 45px; height: 45px;">
