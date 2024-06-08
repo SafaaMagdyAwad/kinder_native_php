@@ -42,6 +42,7 @@
       
       <?php
       require_once "includes/classDetails.php";
+      require_once "includes/releatedClasses.php";
       require_once "includes/footer.php";
       ?>
     </main>
