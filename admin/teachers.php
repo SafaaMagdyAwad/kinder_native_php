@@ -58,7 +58,10 @@ try{
             <tbody>
               <?php foreach($teachers as $teacher) { ?>
               <tr>
-                <th scope="row"><?php echo $teacher['regDate'] ?></th>
+               <th scope="row"><?php   
+                  $dateObject = new DateTime($teacher['regDate']); 
+                  echo date_format($dateObject,"d M Y") ; 
+                ?></th>
                 <td><?php echo $teacher['fullName'] ?></td>
                 <td><?php echo $teacher['jopTitle'] ?></td>
                 <td><?php echo ($teacher['published']==1)?"YES":"NO"; ?></td>
