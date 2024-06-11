@@ -61,13 +61,16 @@ try{
                 foreach ($users as $user) {
               ?>
                 <tr>
-                  <th scope="row"><?php echo $user['regDate'];?></th>
+                  <th scope="row"><?php
+                  $dateObject = new DateTime($user['regDate']); 
+                  echo date_format($dateObject,"d M Y") ;
+                  ?></th>
                   <td><?php echo $user['fullName'];?></td>
                   <td><?php echo $user['userName'];?></td>
                   <td><?php echo $user['email'];?></td>
                   <td><?php echo $user['phone'];?></td>
                   <td><?php echo ($user['active'])==1?"YES":"NO" ; ?></td>
-                  <td><a href="edit_user.php?id=<?php echo $user['id'];?>" class="text-decoration-none"><i>✒️</i></a></td>
+                  <td><a href="edit_user.php?id=<?php echo $user['id'];?>"  onclick="return confirm('are you sure to edit this user ')" class="text-decoration-none"><i>✒️</i></a></td>
                 </tr>
               <?php } ?>
             </tbody>
