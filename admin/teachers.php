@@ -62,9 +62,9 @@ try{
                 <td><?php echo $teacher['fullName'] ?></td>
                 <td><?php echo $teacher['jopTitle'] ?></td>
                 <td><?php echo ($teacher['published']==1)?"YES":"NO"; ?></td>
-                <td><a href="edit_teacher.php?id=<?php echo $teacher['id'] ?>" class="text-decoration-none"><i>✒️</i></a></td>
-                <td><a href="deleteTeacher.php?id=<?php echo $teacher['id'] ?>" class="text-decoration-none"><img src="../img/trash-bin.png" alt="" style="max-width: 35px"></a></td>
-              </tr>
+              <td><a href="edit_teacher.php?id=<?php echo $teacher['id'] ?>" class="text-decoration-none" onclick="return confirm('are you sure to edit this teacher ')"><i>✒️</i></a></td>
+                <td><a href="deleteTeacher.php?id=<?php echo $teacher['id'] ?>" class="text-decoration-none" onclick="return confirm('are you sure to delete this teacher ')"><img src="../img/trash-bin.png" alt="" style="max-width: 35px"></a></td>
+               </tr>
               <?php } ?>
             </tbody>
           </table>
