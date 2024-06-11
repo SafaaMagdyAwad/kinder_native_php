@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $conn->prepare($sql);
 
         $stmt->execute([$fullName,$userName,$email,$password,$phone,$active]);
-        header("location:users.php");
+        header("location:users.php");//if user was logedi(redirect to users)else redirect to ogin
         die();
 
       }
