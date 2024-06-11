@@ -64,8 +64,8 @@ try{
                 <td><?php echo $testimonial['jopTitle'] ?></td>
                 <td><?php echo $testimonial['comment'] ?></td>
                 <td><?php echo ($testimonial['published']==1)?"YES":"NO" ?></td>
-                <td><a href="edit_testimonial.php?id=<?php echo $testimonial['id'] ?>" class="text-decoration-none"><i>✒️</i></a></td>
-                <td><a href="deleteTestimonial.php?id=<?php echo $testimonial['id'] ?>" class="text-decoration-none"><img src="../img/trash-bin.png" alt="" style="max-width: 35px"></a></td>
+                <td><a href="edit_testimonial.php?id=<?php echo $testimonial['id'] ?>" class="text-decoration-none"  onclick="return confirm('are you sure to edit this testimonial ')"><i>✒️</i></a></td>
+                <td><a href="deleteTestimonial.php?id=<?php echo $testimonial['id'] ?>" class="text-decoration-none"  onclick="return confirm('are you sure to delete this testimonial ')"><img src="../img/trash-bin.png" alt="" style="max-width: 35px"></a></td>
               </tr>
               <?php } ?>
             </tbody>
