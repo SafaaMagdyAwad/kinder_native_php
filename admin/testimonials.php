@@ -59,7 +59,10 @@ try{
             <tbody>
               <?php foreach($testimonials as $testimonial) { ?>
               <tr>
-                <th scope="row"><?php echo $testimonial['regDate'] ?></th>
+                <th scope="row"><?php  
+                  $dateObject = new DateTime($testimonial['regDate']); 
+                  echo date_format($dateObject,"d M Y") ; 
+                  ?></th>
                 <td><?php echo $testimonial['fullName'] ?></td>
                 <td><?php echo $testimonial['jopTitle'] ?></td>
                 <td><?php echo $testimonial['comment'] ?></td>
