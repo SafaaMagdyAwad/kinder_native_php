@@ -64,8 +64,8 @@ try{
                 <td><a href="class_details.php?id=<?php echo $class['id'] ?>"><?php echo $class['className'] ?></a></td>
                 <td><?php echo $class['fullName'] ?></td>
                 <td><?php echo ($class['published']==1)?"YES":"NO" ?></td>
-                <td><a href="edit_class.php?id=<?php echo $class['id'] ?>" class="text-decoration-none"><i>✒️</i></a></td>
-                <td><a href="deleteClass.php?id=<?php echo $class['id'] ?>" class="text-decoration-none"><img src="../img/trash-bin.png" alt="" style="max-width: 35px"></a></td>
+                <td><a href="edit_class.php?id=<?php echo $class['id'] ?>" class="text-decoration-none" onclick="return confirm('are you sure to edit this class ')"><i>✒️</i></a></td>
+                <td><a href="deleteClass.php?id=<?php echo $class['id'] ?>" class="text-decoration-none" onclick="return confirm('are you sure to delete this class ')"><img src="../img/trash-bin.png" alt="" style="max-width: 35px"></a></td>
               </tr>
 <?php } ?>  
             </tbody>
