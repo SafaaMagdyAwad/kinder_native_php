@@ -60,7 +60,10 @@ try{
             <tbody>
 <?php foreach($classes as $class){ ?>
               <tr>
-                <th scope="row"><?php echo $class['regDate'] ?></th>
+                <th scope="row"><?php 
+                 $dateObject = new DateTime($class['regDate']); 
+                  echo date_format($dateObject,"d M Y") ; 
+                   ?></th>
                 <td><a href="class_details.php?id=<?php echo $class['id'] ?>"><?php echo $class['className'] ?></a></td>
                 <td><?php echo $class['fullName'] ?></td>
                 <td><?php echo ($class['published']==1)?"YES":"NO" ?></td>
